@@ -7,7 +7,7 @@ tags:
 - future plans
 ---
 A year and a half in development, I'm very happy to announce the impending release of the first version of a brand new Game Boy Advance emulator, written from the ground up in C. Despite being a first version, it's still very featureful. While the emulator might have been ready for a release months ago, I wanted to polish it to be as good as it could be for the first release. It surely shows.
-
+<!--more-->
 Some of the features that will be in the initial version are:
 
 * A solid ARM7TDMI core emulator with near-full Game Boy Advance hardware emulation.
