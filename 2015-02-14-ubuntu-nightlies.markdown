@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Nightlies are now available!"
+title: "Ubuntu nightlies are now available!"
 date: 2015-02-15 00:00:00
 tags:
 - announcement
