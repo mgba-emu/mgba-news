@@ -6,7 +6,7 @@ tags:
 - announcement
 - release
 ---
-A new release of mGBA, version 0.2.0, is available. Two years to the day since mGBA started development, 0.2.0 marks a major feature release. Some of the more prominent features include the addition of support for local link cable multiplayer, cheat code support, the Solar Sensor (as used by in Boktai), configuration options, and much more. An extensive list follows after the cut.<!--more-->
+A new release of mGBA, version 0.2.0, is available. Two years to the day since mGBA started development, 0.2.0 marks a major feature release. Some of the more prominent features include the addition of support for local link cable multiplayer, cheat code support, the Solar Sensor (as used in Boktai), configuration options, and much more. An extensive list follows after the cut.<!--more-->
 
 Features:
 
