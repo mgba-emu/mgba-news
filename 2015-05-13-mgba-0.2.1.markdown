@@ -1,0 +1,56 @@
+---
+layout: post
+title:  "mGBA 0.2.1"
+date:   2015-05-13 22:47:33
+tags:
+- announcement
+- release
+---
+A new release of mGBA, version 0.2.1, is available. This version is primarily a bugfix release. An extensive list of changes follows after the cut.<!--more-->
+
+Bugfixes:
+
+ - All: Fix sanitize-deb script not cleaning up after itself
+ - All: Fix dependencies for libavcodec on Debian-derived platforms
+ - ARM7: Handle writeback for PC in addressing modes 2 and 3
+ - ARM7: Make illegal instruction decoding consistent between ARM and Thumb
+ - ARM7: Fix ARM multiply instructions when PC is a destination register
+ - Debugger: Fix use-after-free in breakpoint clearing code
+ - Debugger: Fix boundary conditions in tab completion
+ - GBA: Fix timers not updating timing when writing to only the reload register
+ - GBA: Fix rewind boundary conditions
+ - GBA: Add initial I/O register settings for background matrix registers
+ - GBA: Fix hang when loading a savestate if sync to video is enabled
+ - GBA: Handle out-of-bounds I/O access
+ - GBA: Fix bounds-checking on EEPROM access
+ - GBA Audio: FIFOs should not poll DMAs that are not scheduled for audio
+ - GBA BIOS: Initialize a variable that may be uninitialized in very rare cases
+ - GBA Memory: Allow SRAM to be 64kB
+ - GBA Memory: Fix 32-bit loads from unaddress cartridge space
+ - GBA Memory: Fix jumping to invalid memory when switching from Thumb to ARM
+ - GBA Video: Fix second frame mode 5
+ - Perf: Fix race condition if a game crashes immediately on start
+ - Qt: Fix Display object leak when closing a window
+ - Qt: Fix .deb dependencies
+ - Qt: Fix "QOpenGLContext::swapBuffers() called with non-exposed window" warning
+ - Qt: Fix window not regaining focus after exiting savestate window
+ - Qt: Fix regression where video would not record if the game had already started
+ - Qt: Fix potential crash if a gamepad causes focus to change
+ - Qt: Fix controller axis querying
+ - Qt: Fix multiplayer windows opening as the wrong size
+ - Qt: Fix controllers sometimes not loading the right profile
+ - SDL: Fix boundary conditions for joystick adjustments
+ - SDL: Allocate properly sized input maps
+ - SDL: Fix potential build issues when Qt and SDL2 are in use
+ - Util: Fix resource leak in UTF-8 handling code
+ - Util: Fix a null-pointer issue when attempting to delete a key
+ - VFS: Fix resource leaks if some allocations fail
+ - Video: Fix an issue with very long filenames
+
+Misc:
+
+ - GBA Memory: Soft-crash if jumping past the end of a ROM
+ - Qt: Show multiplayer numbers in window title
+ - Qt: Solar sensor can have shortcuts set
+
+Get it now in the [Downloads]({{ site.baseurl }}/downloads.html) section. Binaries are available for Windows, Ubuntu and OS X, and the source code is available for all other platforms.
