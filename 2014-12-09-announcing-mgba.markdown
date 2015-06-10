@@ -2,6 +2,8 @@
 layout: post
 title:  "Announcing mGBA"
 date:   2014-12-09 23:18:09
+authors:
+- endrift
 tags:
 - announcement
 - future plans

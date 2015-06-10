@@ -2,6 +2,8 @@
 layout: post
 title: "Ubuntu nightlies are now available!"
 date: 2015-02-15 00:00:00
+authors:
+- endrift
 tags:
 - announcement
 ---

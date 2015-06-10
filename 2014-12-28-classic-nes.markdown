@@ -2,6 +2,8 @@
 layout: post
 title: "Classic NES Series Anti-Emulation Measures"
 date: 2014-12-28 23:00:00
+authors:
+- endrift
 tags:
 - development
 - game tricks

@@ -2,6 +2,8 @@
 layout: post
 title:  "mGBA 0.2.0"
 date:   2015-04-03 21:37:33
+authors:
+- endrift
 tags:
 - announcement
 - release

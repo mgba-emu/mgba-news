@@ -2,6 +2,8 @@
 layout: post
 title: "Nightlies are now available!"
 date: 2014-12-28 16:00:00
+authors:
+- endrift
 tags:
 - announcement
 ---
