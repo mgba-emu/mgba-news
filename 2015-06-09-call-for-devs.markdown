@@ -26,7 +26,7 @@ The project is looking for developers to help in the following areas:
 
  - **Android developers**
 
-   Fact: Android users love emulators. mGBA has some rudimentary work towards an Android version, but that moment it's very raw. Getting an Android developer or two to help with the preliminary version would be much appreciated.
+   Fact: Android users love emulators. mGBA has some rudimentary work towards an Android version, but at the moment it's very raw. Getting an Android developer or two to help with the preliminary version would be much appreciated.
  
  - **Skilled debuggers**
 
