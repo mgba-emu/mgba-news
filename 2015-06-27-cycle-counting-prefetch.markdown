@@ -68,8 +68,7 @@ The following diagram represents what happens without prefetch with the instruct
   {name: 'CPU data', wave: '==0..=0=x', data: ['pc','r0', 'pc', 'pc']},
   {name: 'Instruction', wave: 'x=....=.x', data: ['str r1, [r0]', 'nop']},
 ],
- config: {hscale: 1},
-  foot: {tick: -1, text: ['tspan', "Thumb/ROM P off, N = 3, S = 1, r0 has 0 wait"]}}
+  foot: {tick: -1}}
 -->
 
 This diagram requires a bit of explanation. The first line represents the clock. Each rising edge indicates the end of one clock cycle and the start of the next. The second and third lines are the memory bus: the second indicates the value that is currently on the bus, and the third line is the memory that is being requested. The fourth line shows that, in this diagram, the prefetch unit is disabled. In a subsequent diagram, it shows when the unit is in operation. The next line shows W the current operation of the cartridge bus. When it's low, the bus is idle. When it's high, it means the bus is waiting to get data back, and the data is shown when it is available on the bus. The sixth line shows which piece of data the CPU is currently processing. When it's low, it means the CPU has stalled. The final line shows which instruction is currently being executed. Lastly, the type of each cycle is indicated. S cycles are blue, while N cycles are orange.
@@ -89,8 +88,7 @@ The next diagram shows what happens if prefetch is enabled on the same set of in
   {name: 'CPU data', wave: '===0=x', data: ['pc','r0', 'pc', 'pc']},
   {name: 'Instruction', wave: 'x=.=.x', data: ['str r1, [r0]', 'nop']},
 ],
- config: {hscale: 2},
-  foot: {tick: -1, text: ['tspan', "Thumb/ROM P = 1, N = 3, S = 1, r0 has 0 wait"]}}
+  foot: {tick: -1}}
 -->
 
 Here, the N cycle from loading `r0` is still involved, but since it's an N cycle that does not require accessing ROM, the prefetch unit can run. It triggers, via an S cycle, a load from the ROM. Since this is an S cycle, only one wait state is involved, so the load is finished the next cycle, which happens to be exactly when the CPU requests the next location in the ROM. Thus, the load, from the CPU's perspective, only takes one cycle, and the wait states have disappeared. This saves three cycles, reducing the time of these two instructions to four cycles. Had the `str` taken an additional cycle, the wait state from the `nop` waiting for the next instruction would have disappeared, as well, reducing the `nop` to one cycle (although the previous instruction would have taken at least three).
