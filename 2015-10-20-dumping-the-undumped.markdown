@@ -18,7 +18,7 @@ I've seen dumps of Game Boy Advance Video cartridges floating around, and they w
 
 I went on eBay and found that some of these Game Boy Advance Video movies were pretty cheap. It turns out that there were only mediocre Dreamworks films available, so I purchased a copy of Shrek 2 and excitedly waited for it to arrive. I even asked online [how long people thought it would take me](https://twitter.com/endrift/status/650015266433183745), and I estimated [*about two hours*](https://twitter.com/endrift/status/650015688308846592), since I figured it was just doing a pretty simple bank switch to swap out either part or all of the address space, perhaps with the lower 16MiB of the address space being all static, and the top 16MiB being remappable. Upon receiving the cartridge, I quickly dumped what was immediately visible to the Game Boy Advance without doing any special tricks, and I was quite surprised with what I found.
 
-{% hero m2se-case.png The cartridge exterior %}
+![The cartridge exterior](/assets/m2se-case.png){: .hero }
 
 The first 4kiB of the dump looked pretty usual. It had the usual cartridge header and a bit of initialization code. Nothing special there. I decided to drop the dump into mGBA to see what it did, expecting it to get to the menu screen and then be very confused by things not getting remapped as it expected. Nope, white screen. Well okay, I guess it maps stuff even sooner. mGBA logs when games try to write to the ROM address space, since it's generally read-only, although the bus does allow for data to be output to the cartridge. In fact, this is how devices like the realtime clock and solar sensor in Boktai work; a bit of data is written to the right address on the bus, and then the cartridge sees it and does a bit of I/O with a secondary chip that can produce dynamic data. It looked like the dump wrote four values to addresses 0x08800180 – 0x0880018C with specific values on startup. This was clearly how it did bank switching, so I took the values it was writing and modified the dumping tool to write these values to the ROM bus before dumping, and dumped the ROM again.
 
@@ -37,7 +37,7 @@ Subsequent writes always changed the value written to 0x08800184, implying that 
 
 Opening up the cartridge, I found something a bit surprising. There were two sizable chips, of different form factors, inside the cartridge. One was clearly the ROM. It was a long [TSSOP](https://en.wikipedia.org/wiki/Small_Outline_Integrated_Circuit#TSSOP) chip, and looked like most other ROM or DRAM chips. But the second chip, clearly the mapper, was significantly larger than I expected. It was an [LQFP](https://en.wikipedia.org/wiki/Quad_Flat_Package#Variants) chip, similar in size to the ROM chip. The two chips were labeled as Matrix Memory chips, but the ROM chip was labeled as "3D Memory", and the mapper was labeled as "Controller IC". There was quite a bit more going on here than I expected.
 
-{% hero m2se-pcb.png The PCB interior %}
+![The PCB interior](/assets/m2se-pcb.png){: .hero }
 
 Trying to find more information on these chips led me to a [thread on AssemblerGames](http://assemblergames.com/l/threads/gba-largest-cart-chip-information-required.46627/) that was also looking into these cartridges. Unfortunately, they only had only a bit of information on the ROM chip, and no information on the "controller" chip, and there doesn't seem to be any publicly available information anywhere else. I'd need to do this by hand.
 

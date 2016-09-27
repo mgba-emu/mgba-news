@@ -57,7 +57,7 @@ The timing is very important here. Prefetch can only operate during I cycles, or
 
 The following diagram represents what happens without prefetch with the instruction sequence `str r1, [r0] / nop`, which loads the memory at the address in register `r0`, and stores it into `r1`, then does no operation for one instruction. In this diagram, we assume that `r0` is not an address in ROM, and an address that has 0 wait states. Also, N cycles in ROM are assumed to be delayed with 3 wait states, and S cycles with 1.
 
-{% hero str-ns.svg %}
+![](/assets/str-ns.svg){: .hero }
 <!--
 {signal: [
   {name: 'Clock', wave: 'p........'},
@@ -77,7 +77,7 @@ As can be seen, before the `str` ("store") starts, the memory at the program cou
 
 The next diagram shows what happens if prefetch is enabled on the same set of instructions. Nothing else has changed.
 
-{% hero str-pns.svg %}
+![](/assets/str-pns.svg){: .hero }
 <!--
 {signal: [
   {name: 'Clock', wave: 'p.....'},

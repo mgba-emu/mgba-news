@@ -7,7 +7,7 @@ authors:
 tags:
 - debugging
 ---
-{% hero_big afl.png %}
+![AFL in action](/assets/afl.png){: .hero-big }
 
 Anyone familiar with computer security should be familiar with the concept of [fuzzing](https://en.wikipedia.org/wiki/Fuzz_testing). You throw garbage data at a program, over and over again, to see if it crashes. If it does, you might have a security issue. It's a great way to do automated security testing of software, and has uncovered countless critical issues in software across the board. A popular fuzzing framework, [American Fuzzy Lop](http://lcamtuf.coredump.cx/afl/) (usually called afl or afl-fuzz for short), even has a "_trophy case_" for only a small percentage of the bugs it has uncovered—and there are over 150 bugs listed!
 
@@ -19,7 +19,7 @@ Video game emulators have the common, if not dubious, use case of tons of people
 
 There has been increasing awareness of security implications of emulators recently. The ancient emulator, ZSNES, which was written before the concept of software security was on the forefront of engineers' minds, recently had a ROM published that would [pop open a web page in an external program](https://www.youtube.com/watch?v=Q3SOYneC7mU) with no user interaction other than loading it. Just yesterday, a buffer overflow in the cheat file parsing of VisualBoyAdvance was published in [a rather satirical video](https://www.youtube.com/watch?v=L-L8qWpd_74). Neither of these emulators are actively maintained anymore, but are still widely used. This compounds the problem, as these vulnerabilities may never be patched in a widely used version of the software.
 
-{% youtube L-L8qWpd_74 520 300 %}
+{% youtube "https://www.youtube.com/watch?v=L-L8qWpd_74" %}
 
 To help stem this problem, I wrote a fuzzing harness for mGBA. This allows you to load various types of files and automatically spin a core for some number of frames to see if this input causes any crashes. I've put likely hundreds if not thousands of CPU-hours into fuzzing mGBA and a handful entry points: ROMs, save games, savestates…although cheat files remain un-fuzzed at the moment, this is next after I polish up fuzzing Game Boy savestates. I only started fuzzing the Game Boy core yesterday, and I already have a slew of important bug fixes. Following are all of the bugs I've found through fuzzing the GB core, with basic analyses of the bugs, and I'm sure there are more to come.
 

@@ -8,7 +8,7 @@ tags:
 - announcement
 - development
 ---
-{% hero pkmn-red.png mGBA playing Pokémon Red %}
+![mGBA playing Pokémon Red](/assets/pkmn-red.png){: .hero }
 
 For the past month, I've been working on a special surprise to be released with mGBA 0.5: Game Boy support. Although secondary to Game Boy Advance support, mGBA aims to have extremely accurate Game Boy support, eventually cycle accurate. Although still early in development, it already passes a high percentage of many GB accuracy test suites. However, it's still quite rough around the edges and is not recommended for everyday usage: it's quite slow due to the aim of cycle-accuracy, and still very buggy. Support will be available in upcoming [nightlies]({{ site.baseurl }}/downloads.html#development-downloads), starting tonight.
 

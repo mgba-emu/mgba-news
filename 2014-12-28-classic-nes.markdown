@@ -9,7 +9,7 @@ tags:
 - game tricks
 - debugging
 ---
-{% hero classic-nes-error.png Game Pak Error %}
+![Game Pak Error](/assets/classic-nes-error.png){: .hero }
 
 Some of you may remember a series of peculiar Game Boy Advance games that came out over the course of 2004. In stark contrast with the usual dark grey cartridges with colorful labels, a set of light grey cartridges with simple labels were released containing games ported from the original Nintendo Entertainment System. Dubbed the [Classic NES Series](http://nintendo.wikia.com/wiki/Classic_NES_Series) in the United States, these games were interesting for a number of reasons.
 
@@ -59,7 +59,7 @@ What this code does is pretty simple. It stores 0 to register r1, then loads the
 
 What's imperative to understanding what's going on in this block of code is to realize that, once the instruction has been fetched by the pipeline, changing the memory that backs that address is irrelevant. This is similar to how cache coherence works, but is even more stringent. This means that if your pipeline is long enough, the instruction that enters into the pipeline during the write is the one that stores 255. If it's too short, it stores 0. As it turns out, the games will fail to boot if it finds the value 0 in register r1, but boots fine if it's 255. Upon realizing this, I had to extend the emulated pipeline in mGBA to include a dummy stage in between execution and fetching. In the real ARM7TDMI pipeline, there is a decoding stage between these two stages. However, I'd misread the manual and did not realize this stage existed separately. [Adding another stage to the pipeline](https://github.com/mgba-emu/mgba/commit/28ac288d2cc753aab0493a471726cc5795a09363) in the interpreter, suddenly the Classic NES Series games would run!
 
-{% hero classic-nes-metroid.png Metroid's start screen %}
+![Metroid's start screen](/assets/classic-nes-metroid.png){: .hero }
 
 ## Trick #6: Audio FIFO irregularities
 
