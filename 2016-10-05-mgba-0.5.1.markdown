@@ -8,7 +8,7 @@ tags:
 - announcement
 - release
 ---
-A new release of mGBA, version 0.5.1, is available. This version is a bugfix release, which fixes many issues that weren't caught before the relese 0.5.0. An extensive list of changes follows after the cut.<!--more-->
+A new release of mGBA, version 0.5.1, is available. This version is a bugfix release, which fixes many issues that weren't caught before the release of 0.5.0. An extensive list of changes follows after the cut.<!--more-->
 
 Bugfixes:
 
