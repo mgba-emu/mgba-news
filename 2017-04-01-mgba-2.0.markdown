@@ -1,0 +1,51 @@
+---
+layout: post
+title:  "A Preview of mGBA 2.0"
+date:   2017-04-01
+authors:
+- endrift
+tags:
+- announcement
+---
+Today I'm proud to give you a sneak peek of some of the features I have planned for mGBA 2.0. There's big stuff on the horizon. You might be asking, wait, mGBA 1.0 isn't even out yet. Are you honestly skipping 1.0 and going straight to 2.0? Skipping major version numbers is all the rage these days. But, no. mGBA 1.0 will still come out, probably sometime late this year. I've been hard at work on a gigantic feature that won't be ready for mGBA 1.0. I've been keeping it under wraps for quite a long time, and I'm now finally ready to share.
+<!--more-->
+
+Oh wait, I said "some features," didn't I? I'm only going to be showing off one feature in this article. Sorry. But it's the one you've all been waiting for. The third pillar of mGBA. Without further ado, I'm proud to announce that I have been working on a project in secret for the better part of the last nine months: Nintendo DS support.
+
+Yes, really. It's actually happening. Here are some screenshots:
+
+{: .gallery}
+![Cory in the House](/assets/mnds-1.jpg)![Shrek: Smash n' Crash Racing](/assets/mnds-2.jpg)![Bee Movie Game](/assets/mnds-3.jpg)![Sonic Chronicles: The Dark Brotherhood](/assets/mnds-4.jpg)![Feel the Magic: XY/XX](/assets/mnds-5.jpg)![Pokémon Black](/assets/mnds-6.jpg)
+
+You might say, oh, those could be faked. They could be taken in DeSmuME or DraStic or NO$GBA or even a real DS. You're right. They could be faked. But they're not. I don't even have a copy of DraStic to use to fake screenshots.
+
+At the moment, it's really buggy, there's only a slow software renderer, and compatibility is extremely low. But along with StapleButter's [melonDS](http://melonds.kuribo64.net) and Shonumi's [GBE+](https://github.com/shonumi/gbe-plus), we will finally provide DeSmuME some well-needed competition, and usher in a golden age of DS emulation (only ten or so years late).
+
+While I have been ducking questions about whether or not I was going to add DS support for ages, this has in fact been planned for well over a year.The real reason I added GB emulation to mGBA in the first place was not to create yet another GB emulator. The world already has enough of those. Secretly, the real reason was because I wanted to force myself to refactor enough of mGBA to ease in adding more cores to mGBA, specifically so I could add DS support later on. Yes, I wrote a GB emulator so I could write a DS emulator. Really. I'd been biding my time until GBA and GB/C support was polished enough, but I was prompted to start sooner than I wanted to by growing unrest towards DeSmuME and the creation of melonDS. It just so happened that I started that DS emulator before I got as far into GB emulation as I had wanted to.
+
+Getting excellent DS emulation, perfecting GBA emulation and bringing GB/C emulation up to par with BGB and gambatte is going to me many years worth of work. It's been four years already, so here's to another four. Just remember, apart from minor contributions, it's only me working on this project, so things may be slow. It'll get there. Eventually.
+
+Source code is currently being polished up and readied for a preview release, which will hopefully be ready soon. Things are pretty rough right now, so it might be a few weeks.
+
+Now for some answers to questions you might have:
+<dl>
+<dt>Wait, really? Like, seriously?</dt>
+ <dd>Yes</dd>
+<dt>Will it have a hardware renderer too?</dt>
+ <dd>Yes</dd>
+<dt>What about upscaling? Texture packs?</dt>
+ <dd>Yes</dd>
+<dt>Really?</dt>
+ <dd>Yes</dd>
+<dt>Are you going to rename mGBA? To mNDS or something? Or just leave it called mGBA?</dt>
+ <dd>Yes</dd>
+<dt>That wasn't a yes or no question.</dt>
+ <dd>Yes</dd>
+<dt>Okay smarty-pants, can you answer anything other than Yes?</dt>
+ <dd>Yes</dd>
+<dt>Sigh, okay, so is this actually real?<dt>
+ <dd>:^)</dd>
+<dt>I guess that's not a Yes.</dt>
+ <dd>Yes</dd>
+<dt>So, are you going to write a 3DS emulator too?</dt>
+ <dd>What, no, get out of here. No more questions! Article over.</dd>
