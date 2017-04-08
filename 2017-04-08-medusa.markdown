@@ -1,0 +1,45 @@
+---
+layout: post
+title:  "A Taste of mGBA 2.0"
+date:   2017-04-08
+authors:
+- endrift
+tags:
+- announcement
+- release
+---
+It's been teased, it's been joked about. No one could quite tell if the April 1 article was a joke or not. Well, allow me to formally announce to you: it's real. Every single word was true. I've been working tirelessly for the past several months to bring a DS emulator up to a good enough point to release a preview build. And today, I think I'm there. So allow me to introduce another new Nintendo DS emulator: with added DS support, mGBA will now be **medusa**.
+<!--more-->
+
+![medusa](/assets/medusa-hero.jpg){: .superhero}
+
+Before you get too excited, please allow me to state that this is still a very early work in progress—this isn't even a 0.1 build of medusa; it's still buggy, slow, and incomplete. This is more of a proof of concept to show off what I've been working on since June of 2016, and the reason mGBA 0.6.0 still isn't out. While a good number of games work relatively well, virtually every game has graphical bugs, and many have even worse bugs. So *caveat emptor*, this is not a real release, and medusa won't be replacing any other DS emulators any time soon.
+
+While medusa is still an alpha quality software, it will be versioned separately from mGBA. Releasing hopefully soon will be mGBA 0.6.0, and on a separate schedule, medusa 0.1.0 will release. Sometime after mGBA 1.0 is released, the medusa branch will be merged back into mGBA and the combined product will become medusa 2.0. This will likely happen sometime in 2018, but that's still up in the air. There's a lot of work still to be done. Until then, medusa will contain all of the features of mGBA releases, and likely some experimental features that aren't quite polished for a stable release. Every so often, mGBA master will be merged into the medusa branch so as to keep it up to date. As such, releases of medusa may contain unpolished features from mGBA master up until the merge.
+
+Currently, about 80% of the DS's hardware is implemented, and many games are fully playable. However, the software rasterizer for the 3D graphics is still very slow. This release should help those interested in finding bugs contribute to medusa before 0.1 is released, but it is not recommended for actual playing of games.
+
+Some of the more important features that are still missing are:
+
+- Savestates
+- Several graphical features including edge marking, toon shading and fog
+- Some audio features such as the square wave and noise channels
+- Microphone support
+- HLE BIOS and firmware
+
+A more comprehensive and up-to-date list can be found [in the readme](https://github.com/mgba-emu/mgba/blob/medusa/README.md#dscaveat).
+
+Meanwhile, many popular games have pretty serious issues:
+
+- Mario Kart DS races run at half speed
+- The World Ends With You locks up during the new game intro
+- Pokémon Diamond/Pearl/Platinum have a lot of graphical issues affecting battles
+- Pokémon Black/White have graphical issues during the battle transition
+- Some graphics are missing in New Super Mario Bros. and WarioWare: Touched!, among other games
+- Star Fox Command's text is illegible
+
+Please report any issues you find to the [bug tracker](https://github.com/mgba-emu/mgba/issues); the more that are reported, the more that can be fixed. If you wish to discuss  medusa, there are both [forums](https://forums.mgba.io) and the [#medusa-emu channel on FreeNode](irc://irc.freenode.net/#medusa-emu)
+
+As always, downloads can be found on the [download page]({{ site.baseurl }}/downloads.html). Due to the heavy use of 64-bit math in the renderer, there are now 64-bit Windows builds. There will also be separate nightlies for medusa, as there are for mGBA master. The source code can be found [on GitHub](https://github.com/mgba-emu/mgba/tree/medusa/).
+
+Please enjoy all of the hours I've put into medusa and mGBA, and here's hoping for a better future for DS emulation. If you're looking to give back, I always appreciate pledges on the [mGBA Patreon](https://patreon.com/mgba), and more ways are listed on the [donate page]({{ site.baseurl }}/donate.html).
