@@ -7,6 +7,7 @@ authors:
 tags:
 - announcement
 - release
+- medusa
 ---
 It's been teased, it's been joked about. No one could quite tell if the April 1 article was a joke or not. Well, allow me to formally announce to you: it's real. Every single word was true. I've been working tirelessly for the past several months to bring a DS emulator up to a good enough point to release a preview build. And today, I think I'm there. So allow me to introduce another new Nintendo DS emulator: with added DS support, mGBA will now be **medusa**.
 <!--more-->
