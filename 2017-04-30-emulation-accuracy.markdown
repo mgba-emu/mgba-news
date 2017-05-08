@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: patreon
 title: "Emulation Accuracy, Speed, and Optimization"
 date: 2017-04-30
 authors:
@@ -8,6 +8,7 @@ tags:
 - development
 - emulation
 - hardware
+- patreon
 ---
 A commonly discussed topic in emulation is the "accuracy" of an emulator. The term means how close the emulation is to the behavior of the original hardware. However, there is a significant amount of complexity hidden behind this simple term. There is no simple metric for what makes an emulator "accurate". Accuracy in emulators is thought to mean it's slower, but has fewer bugs. Less accurate emulators are often said to be faster and "good enough" for most games. While there is a kernel of truth to these claims, there is far more to the reality of the matter.
 <!--more-->
