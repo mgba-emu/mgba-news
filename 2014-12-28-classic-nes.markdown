@@ -8,6 +8,7 @@ tags:
 - development
 - game tricks
 - debugging
+toc: true
 ---
 ![Game Pak Error](/assets/classic-nes-error.png){: .hero }
 
