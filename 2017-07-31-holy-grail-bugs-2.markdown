@@ -15,6 +15,7 @@ It's been two months since first writing on Holy Grail bugs in emulation and whi
 Of course, the previous article only covers two emulated platforms. There are far more than just two emulated systems out there and along with them a large share more incomprehensible issues.
 
 <!--more-->
+
 ## Nintendo DS Bugs
 
 With currently only two major contenders for mature DS emulators what counts as a Holy Grail bug in DS emulation is a bit more difficult to define. While development has slowed, [DeSmuME](http://desmume.org) is still the standout DS emulator for PCs. Seemingly contradictorily however, the oft-considered best DS emulator is [DraStic](http://www.drastic-ds.com): it's much faster, more accurate and less buggy, but has the limitations of being closed source and solely for Android[^1], making it hard to peer into its development process. DraStic's developer Exophase provided some insight into its development, citing several problematic, bizarre behaviors including games that relied on reading unmapped memory, Art Academy relying race conditions involving waiting for IRQs, or worse: expecting proper behavior for accessing. VRAM that has overlapping mappings. Yes, is a thing that the DS can do and is well-defined.
