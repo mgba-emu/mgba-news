@@ -14,35 +14,35 @@ Bugfixes:
 
  - GB, GBA: Fix crashes when attempting to identify null VFiles
  - GB, GBA: Fix sync to video with frameskip
- - GB, GBA Savedata: Fix savestate-related save overwriting (fixes [#834](mgba.io/i/834))
- - GB Audio: Fix NRx2 writes while active (fixes [#866](mgba.io/i/866))
+ - GB, GBA Savedata: Fix savestate-related save overwriting (fixes [#834](https://mgba.io/i/834))
+ - GB Audio: Fix NRx2 writes while active (fixes [#866](https://mgba.io/i/866))
  - GB Core: Fix palette loading when loading a foreign config
  - GB MBC: Pocket Cam memory should be accessible without enabling
  - GB MBC: Fix SRAM sizes 4 and 5
- - GB MBC: Fix RTC initialization (fixes [#825](mgba.io/i/825))
+ - GB MBC: Fix RTC initialization (fixes [#825](https://mgba.io/i/825))
  - GB MBC: Fix RTC loading when file size is off
  - GB Memory: Initialize peripheral pointers
- - GB Memory: Prevent accessing empty SRAM (fixes [#831](mgba.io/i/831))
- - GB Memory: Fix HDMA count starting in mode 0 (fixes [#855](mgba.io/i/855))
+ - GB Memory: Prevent accessing empty SRAM (fixes [#831](https://mgba.io/i/831))
+ - GB Memory: Fix HDMA count starting in mode 0 (fixes [#855](https://mgba.io/i/855))
  - GB Memory: Actually load latch time from savestate
  - GB Serialize: Fix deserializing video STAT
- - GB Video: Fix 16-bit screenshots (fixes [#826](mgba.io/i/826))
+ - GB Video: Fix 16-bit screenshots (fixes [#826](https://mgba.io/i/826))
  - GB Video: Fix potential hang when ending mode 0
  - GB Video: Fix read mode when enabling LCD
  - GBA: Reset active region as needed when loading a ROM
  - GBA: Fix keypad IRQs not firing when extra buttons are pressed
  - GBA BIOS: Use core's VRAM variable instead of renderer's
- - GBA Cheats: Fix PARv3 multiline blocks (fixes [#889](mgba.io/i/889))
- - GBA I/O: Fix reading from a few invalid I/O registers (fixes [#876](mgba.io/i/876))
- - GBA Savedata: Fix 512 byte EEPROM saving as 8kB (fixes [#877](mgba.io/i/877))
- - GBA Savedata: Fix size of SRAM saves (fixes [#883](mgba.io/i/883))
- - GBA Video: Fix broken sprite blending hack (fixes [#532](mgba.io/i/532))
+ - GBA Cheats: Fix PARv3 multiline blocks (fixes [#889](https://mgba.io/i/889))
+ - GBA I/O: Fix reading from a few invalid I/O registers (fixes [#876](https://mgba.io/i/876))
+ - GBA Savedata: Fix 512 byte EEPROM saving as 8kB (fixes [#877](https://mgba.io/i/877))
+ - GBA Savedata: Fix size of SRAM saves (fixes [#883](https://mgba.io/i/883))
+ - GBA Video: Fix broken sprite blending hack (fixes [#532](https://mgba.io/i/532))
  - Python: Fix importing .gb or .gba before .core
  - Qt: Fix command line debugger closing second game
  - Qt: Fix LOG argument order
  - Qt: Fix timezone issues with time overrides
- - Qt: Fix sprite export pausing game indefinitely (fixes [#841](mgba.io/i/841))
- - SDL: Fix potential race condition when pressing keys (fixes [#872](mgba.io/i/872))
+ - Qt: Fix sprite export pausing game indefinitely (fixes [#841](https://mgba.io/i/841))
+ - SDL: Fix potential race condition when pressing keys (fixes [#872](https://mgba.io/i/872))
 
 Misc:
 
@@ -53,7 +53,7 @@ Misc:
  - Qt: Allow overrides to be saved before a game is loaded
  - Qt: Hide mouse immediately when loading
  - SDL: Fix 2.0.5 build on macOS under some circumstances
- - VFS: Make VFile.truncate work growing files on PSV (fixes [#885](mgba.io/i/885))
+ - VFS: Make VFile.truncate work growing files on PSV (fixes [#885](https://mgba.io/i/885))
 
 
 Get it now in the [Downloads]({{ site.baseurl }}/downloads.html) section. Binaries are available for Windows, Ubuntu, macOS, 3DS, Vita, and Wii, and the source code is available for all other platforms.
