@@ -13,6 +13,6 @@ When homebrew hit the Wii U in 2015 I decided to not create an official port of 
 
 When the Switch eventually did launch, with little news on a Virtual Console, I decided that I would port mGBA to the Switch if Nintendo had in fact abandoned VC as the rumors claimed. As the fate of VC got more and more grim, I decided that I would release a Switch port as soon as hardware accelerated graphics arrived.
 
-With the recent addition of 3D graphics support to libnx I decided to jump in. Porting to the Switch was relatively painless, and I'm glad to announce that early builds of mGBA for Switch are [now available on the downloads page]({{ site.baseurl }}/downloads.html#homebrew-1) and the upcoming mGBA 0.7.0 will include official Switch support.<!--more-->
+With the recent addition of 3D graphics support to libnx I decided to jump in. Porting to the Switch was relatively painless, and I'm glad to announce that early builds of mGBA for Switch are [now available on the downloads page]({{ site.baseurl }}/downloads.html#homebrew-2) and the upcoming mGBA 0.7.0 will include official Switch support.<!--more-->
 
 The Switch port is still missing features, such as rumble and controller sensor support, which will arrive in upcoming builds. Compiling mGBA for Switch currently requires building [libnx](https://github.com/switchbrew/libnx) and [libdrm\_nouveau](https://github.com/devkitPro/libdrm_nouveau) from source, as it requires fixes in both libraries that have not yet made it into releases. Please be patient as the libraries and the port improves.
