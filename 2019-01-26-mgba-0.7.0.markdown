@@ -14,7 +14,7 @@ After an extended incubation period mGBA 0.7.0 is now available. This is a major
 
 ## Changes from 0.6.3
 
-### Features:
+### Features
 
  - ELF support
  - Game Boy Camera support
@@ -35,7 +35,7 @@ After an extended incubation period mGBA 0.7.0 is now available. This is a major
  - GBA: ARMIPS/A22i-style and ELF symbol table support
  - Initial Switch port
 
-### Bugfixes:
+### Bugfixes
 
 - ARM: Fix MSR when T bit is set
  - Core: Fix audio sync breaking when interrupted
@@ -84,7 +84,7 @@ After an extended incubation period mGBA 0.7.0 is now available. This is a major
  - Qt: Improve FPS timer stability
  - Util: Fix wrapping edge cases in RingFIFO
 
-Misc:
+### Miscellaneous
 
  - 3DS: Remove deprecated CSND interface
  - All: Make FIXEDi\_ROM\_BUFFER an option instead of 3DS-only
@@ -121,9 +121,9 @@ Misc:
  - Util: Don't build crc32 if the function already exists
  - Wii: Move audio handling to callbacks (fixes [#803](https://mgba.io/i/803))
 
-## Changes from 0.7 beta 1:
+## Changes from 0.7 beta 1
 
-### Features:
+### Features
 
  - Libretro: Add Game Boy cheat support
  - Qt: Separate fast forward volume control (fixes [#846](https://mgba.io/i/846), [#1143](https://mgba.io/i/1143))
@@ -135,7 +135,7 @@ Misc:
  - Tile viewer now has adjustable width
  - Python: Experimental audio API
 
-### Bugfixes:
+### Bugfixes
 
 - 3DS: Fix unused screens not clearing (fixes [#1184](https://mgba.io/i/1184))
  - Core: Remember to deinit proxy ring FIFO
@@ -163,7 +163,7 @@ Misc:
  - Qt: Ensure FATAL logs reach log view
  - SDL: Fix handling of invalid gamepads (fixes [#1239](https://mgba.io/i/1239))
 
-### Misc:
+### Miscellaneous
 
 - CMake: Fix libswresample version dependencies (fixes [#1229](https://mgba.io/i/1229))
  - Debugger: Minor text fixes
