@@ -1,0 +1,357 @@
+---
+layout: post
+title: "mGBA 0.9.0"
+date: 2021-03-28
+toc: yes
+authors:
+- endrift
+tags:
+- announcement
+- release
+---
+After the seemingly longest year possible, mGBA 0.9.0 is finally here.
+It's been a difficult year for the entire world and that definitely had an impact on development this cycle too.
+While progress marched on with mGBA for the first few months of last year, I was able to release 0.8.1 through 0.8.3 picking up most of the bug fixes I made along the way towards 0.9.
+After several months there were lots changed under the surface, but not many user visible new features.
+In the interest of releasing an properly exciting new version of mGBA I decided to hold onto releasing 0.9 until it was polished and featureful.
+During the latter half of the year I finally started a push for features, and released 0.8.4 as the last of the 0.8 line.
+Remember, mGBA currently only has _one_ major developer, so things can take quite a long time to finish, and if I'm not actively working on it any given week then there isn't progress made that week.
+While this did lead to 0.9 being effectively "coming soon" for many, many months in a row, it has led to what I believe to be an extremely polished release, so I'm now happy to announce that mGBA 0.9.0 is done and out.
+
+Though it has dozens and fixes and tweaks under the hood, there are some pretty major features to announce, including full e-Reader support, some new enhanced utilities such as a save type converter and a bug report tool, and more.
+The most exciting features added in this release are detailed after the cut, along with a full change log.
+<!--more-->
+
+## Fully functional e-Reader support
+
+{: .gallery }
+![e-Reader scanning a card](/assets/ereader-scan.png)
+
+mGBA now has a fully functional e-Reader implementation, making it only the second emulator, after NO$GBA, to have a full implementation.
+While VBA has had a partial implementation for years, that implementation is based on parsing the cards _outside_ of the emulated ROM and then jamming the parsed cards into the emulated state.
+This approach requires per-game hacks for each of the 3 versions of the e-Reader ROM, and completely bypasses emulation of the scanning itself.
+As an accuracy-focused emulator, this type of bodge was completely unacceptable to me so I decided to dive in and do it right.
+
+Work on e-Reader support in mGBA actually started several years ago, but hit a roadblock when I couldn't figure out how exactly the dotcode images appeared when scanned by the game.
+Documentation was somewhat sparse, and as with a lot of the GBA documentation out there tended to gloss over many of the fine details.
+I assumed figuring this out would require writing difficult hardware tests, so I decided to push it off until the next release when I'd have time to write those tests.
+And then when I didn't write those tests in time for the next release it got pushed out again. And again. And again.
+Unfortunately this meant that in the meantime work on the feature languished despite a significant amount already being done.
+
+{: .gallery }
+![e-Reader connecting to Super Mario Advance 4](/assets/ereader-sma4.png)
+
+I decided to make a hard push for e-Reader support in mGBA 0.9 so I looked into what was left to get it all working, and realized some mistakes in my assumptions about how it would appear when scanned.
+After mocking up various tools for manipulating the card data formats I got something that actually worked, and from there things just fell into place.
+Though linking with e-Reader supported titles such as Super Mario Advance 4 was initially buggy that is now also supported, meaning you can do almost everything that the original e-Reader could now in emulated form!
+Just boot the e-Reader ROM and use the "Scan e-Reader dotcodes" option in the File menu to send one or more cards to the emulated e-Reader to load.
+Though I cannot link to card scans for legal reasons, I do intend to release tools for parsing high quality card scans for those of you with good scanners sometime in the future.
+
+## Improved user tools
+
+mGBA 0.9 also introduces several new and improved tools for users.
+Though most users may never need any of these mGBA strives to provide a great experience for everyone from first time GBA gamers to seasoned ROM hackers, speedrunners, and even game and homebrew developers.
+So I'm glad to announce there are some new and improved tools in this release to fill some gaps I'd observed in user experience.
+
+### Bug report tool
+
+{: .gallery }
+<img alt="GIF/APNG/WebP dialog" srcset="/assets/bug-reporter.png 2x">
+
+One of the most important parts of guaranteeing a good user experience is to keep mGBA as free from bugs as possible, which users facilitate by reporting bugs they do find.
+Unfortunately, one of the most frustrating parts of guaranteeing a good user experience is getting bug reports from users that do not contain nearly enough information to fix the bug.
+Often there's a back and forth of requesting more info from the user, who may or may not reply, and even if they do it can drag out for weeks as enough information is gathered to finally track down the root cause of the bug.
+But what if mGBA could automatically gather all of the pertinent information for you and stuff it into one easy to attach file in the bug report?
+
+In the interest of easing along the process for everyone involved there is now a tool that does just that:
+it gathers a bunch of information about the computer in question, what games are running, and the user's configuration, zips it up and directs you to the bug reporting page where you can file a new bug with the zip attached.
+It also can optionally include the save game and a current save state of the currently loaded game.
+Further, in the interest of privacy, it automatically strips out the name of the home directory and lets you review and edit the information it collects before it creates the zip, just in case you have more information you wish to redact for whatever reason.
+Hopefully this new tool will expedite fixing bugs since the back and forth of requesting info will be mostly eliminated!
+Though this tool is not yet available on homebrew ports, I hope to add support there too in future releases.
+
+### Save converter
+
+{: .gallery }
+<img alt="Save converter dialog" srcset="/assets/save-converter.png 2x">
+
+Have a save game that works in mGBA and want to use it in a 3DS VC injection?
+What about a save state that you want to extract the save game from to use outside of mGBA?
+Or maybe you want to move your Final Fantasy Legend save between emulators?
+Using the new save converter tool it's possible to manipulate save data in various ways, including converting save game files between various incompatible formats, and extracting the "battery" save game out of an mGBA emulator save state.
+All you need to do is select a compatible file, select one of its guesses for what file type it is, and it'll tell you which types it can convert it into.
+Future releases should add support for more formats, such as NO$GBA battery saves.
+
+### WebP and APNG recording
+
+{: .gallery }
+<img alt="GIF/WebP/APNG dialog" srcset="/assets/gif-apng-webp-dialog.png 2x">
+
+In previous versions of mGBA there were two tools for recording videos of gameplay: one which could record a range of different formats such as MP4s and WebMs, and one that could only record GIFs.
+While this may have been a neat feature several years ago, in the meantime browsers have added support for formats that compress better and play smoother.
+As such, the old GIF recording dialog has been refreshed and now supports recording as WebP and APNG as well.
+It also now has an option to toggle if the recorded video should loop or not.
+
+## More debugging improvements
+
+This release adds a lot of enhancements to debugging and even some new tools.
+Though the visual debugger isn't done yet, a bunch of changes have happened behind the scenes in preparation for future work on it.
+Here's a quick explanation of several of the bigger additions and changes.
+
+First and foremost, initial support for stack frame tracking was added by first-time contributor ahigerd.
+This functionality is currently not heavily optimized and is therefore off by default and must be enabled per session.
+To enable it, first open the command line debugger (in the Qt version this is under Tools > Open debugger console), and type `stack` to see the list of supported tracing modes.
+Currently there are five, though at this time they are only supported on the GBA:
+
+- `off`, the default, disables stack tracing entirely.
+- `trace-only` collects information on the stack frames as you run through the game.
+- `break-call` will break into the debugger when a function is called.
+- `break-return` will break into the debugger when a function returns.
+- `break-all` will break into the debugger on both call and return.
+
+The feature is somewhat experimental still and bug reports are appreciated.
+
+Another feature ahigerd added is the ability to run simple scripts in the debugger.
+Though nothing like what the eventual scripting system will be, this lets you put several commands you can type into the command line debugger into a file with a name ending with `.mrc` and then run them using the `source` command.
+Currently some commands don't work when run this way but that will be fixed in future releases.
+
+Further, while you could previously use symbols loaded for a game as addresses in the debugger, the disassembler now also will resolve addresses back to symbol names.
+This means that branches will now say what function it's calling, and global variable accesses will show up as well.
+In future releases I would like to add richer support for debugging symbols, letting you access local variables, line numbers, and more, but that's still pending.
+
+One of the goals I had for mGBA 0.9 was to bring Game Boy debugging up to snuff.
+For a long time it had languished behind Game Boy Advance debugging in terms of which debugging tools were supported and how well they worked.
+Now the I/O register viewer and frame viewer, which had previously been restricted only to GBA, work on GB too.
+They still need some polish for both systems but this is still a huge step up from where things were before.
+
+Another new feature on the command line debugger is the ability to print the list of pending events.
+In version 0.6 mGBA added an event queue system to replace its older timing subsystem, and one of the pieces of this system was that every individual type of event had its own name.
+These names are human readable strings, but they were never exposed to a user since they were originally intended for debugging the emulator itself.
+The new `events` command in the command line debugger prints out the entire queue and how many cycles until the individual events are scheduled to occur.
+
+## Oh yes, and another often requested feature...
+
+One of the criteria that I've wanted to knock out before releasing a proper version 1.0.0 was to have major feature parity with other widely used Game Boy Advance emulators.
+To outshine NO$GBA I want to add a visual debugger and tons of helpful debugging tools.
+To complement BizHawk, which already uses mGBA for its GBA emulation, I want to add integrated scripting.
+And to obsolete VBA there are still a few things left to do.
+This release adds e-Reader emulation, which removes one of the final remaining items from that list, but there's one other big one left.
+What was it again?
+Oh right.
+
+{: .gallery }
+![Navi Trackers works great now](/assets/navi-trackers.png)
+
+For a long time the only way to play GameCube games that linked with GBA games was by using newer versions of VBA, like VBA-M.
+However, it doesn't even work in the latest version of VBA-M (at the time of writing, 2.1.4), so with mounting complaints from all sides I bit the bullet and finally polished up the long-stagnant Dolphin linking branch.
+Much like with e-Reader support work on this started several years ago but stalled out when I hit roadblocks.
+In this case it could connect in some cases but seemed generally unreliable in comparison to VBA-M's connection.
+Somewhat disappointed by how VBA-M had been handling updates and attempts to fix the link I decided that I should try to revive the branch and see if I could get it working well.
+Much to my surprise many of the issues that had plagued it previously just seemed to have resolved in the meantime, pointing to the issues being Dolphin-side and not mGBA-side.
+
+After polishing the feature until it practically sparkled it's now merged and ready for general usage.
+You will need a copy of the GBA boot ROM (sometimes known as the "BIOS") for this feature to work with most games.
+There are several ways to obtain this file, though I can't provide it for legal reasons.
+Once you have the file you can set it up under Settings > BIOS and you'll be ready to go.
+Then just go to File > Connect to Dolphin, hit connect, and if Dolphin is running and waiting for a GBA connection it'll connect.
+You can also enter the IP address of a computer if Dolphin is running on another computer on the local network, and there's a check box that lets you reset mGBA when it connects, which is useful for connecting to games like Pok&eacute;mon Colosseum which requires you to turn on the GBA with the game inserted already.
+
+{: .gallery }
+<img alt="The Connect to Dolphin dialog is pretty simple" srcset="/assets/dolphin-dialog.png 2x">
+
+While working on this feature I also discovered several shortcomings in the protocol Dolphin uses to communicate with GBA emulators.
+I patched some some of these the best I could and submitted the improvements to Dolphin, but some of them will need much more thorough changes.
+I plan to investigate ways to go about doing this in the future, but for now such changes were beyond the scope of this release.
+As such some games still have some connection issues or can be glitchy, but there will be fixes coming down the line.
+
+{: .gallery }
+![Finally together, mGBA and Dolphin](/assets/ffcc.jpg)
+
+## And more...
+
+Here are some features I'd like to highlight before the full changelog in the next section:
+
+- Single Pak game linking now works with most games.
+- Accuracy _and_ speed improvements for the OpenGL enhancement renderer.
+- Running mGBA for Wii as an injected Wii U VC title now supports the game pad.
+- Preliminary support for Game Boy cartridges with MBC6 flash memory (for Net de Get @ 100) and additional unlicensed mappers.
+- A bug compatibility mode for ROM hacks that were only tested in VBA enables many broken ROM hacks to work in mGBA now, too.
+  This mode is enabled by default for FireRed ROM hacks and must be manually enabled in overrides for other games.
+- Dozens and dozens of bug fixes.
+
+## Changelog
+
+### Features
+
+ - e-Reader card scanning
+ - New tool for converting between different save game formats
+ - WebP and APNG recording
+ - Separate overrides for GBC games that can also run on SGB or regular GB
+ - Game Boy Player features can be enabled by default for all compatible games
+ - Frame and I/O viewer support for Game Boy
+ - Bug report tool for gathering information helpful for reporting bugs
+ - Mute option in homebrew ports
+ - Status indicators for fast-forward and mute in homebrew ports
+ - VBA bug compatibility mode for ROM hacks that don't work on real hardware
+ - Read-only support for MBC6 flash memory
+ - New unlicensed GB mappers: Pokémon Jade/Diamond, BBD, and Hitek
+ - Stack tracing tools in ARM debugger (by ahigerd)
+ - Command scripts for CLI debugger (by ahigerd)
+ - Scheduled event dumping in CLI debugger
+ - ARM disassembler now resolves addresses to symbol names
+ - Add Game Boy Player feature support to ports
+ - Individual window types can now be toggled in debugging views
+ - Support for the Wii U GamePad when running as an injected VC title
+
+### Emulation fixes
+
+ - ARM: Fix ALU reading PC after shifting
+ - ARM: Fix STR storing PC after address calculation
+ - ARM: Fix Addressing mode 1 shifter on rs == pc (fixes [#1926](https://mgba.io/i/1926))
+ - ARM: Fix long multiply-and-accumulate register write order (fixes [#1956](https://mgba.io/i/1956))
+ - ARM: Fix long and accumulate multiply timing
+ - GB: Partially fix timing for skipped BIOS
+ - GB: Downgrade DMG-only ROMs from CGB mode even without boot ROM
+ - GB: Fix marking BIOS as unmapped when skipping BIOS (fixes [#2061](https://mgba.io/i/2061))
+ - GB Audio: Fix serializing sweep time
+ - GB Audio: Fix some channel 4 timing edge cases
+ - GB MBC: Fix MBC1 mode changing behavior
+ - GB MBC: Fix some MBC3 bit masking
+ - GB Video: Fix state after skipping BIOS (fixes [#1715](https://mgba.io/i/1715) and [#1716](https://mgba.io/i/1716))
+ - GBA: Fix timing advancing too quickly in rare cases
+ - GBA: Clear GBP connection on reset
+ - GBA Audio: Revamp FIFO emulation (fixes [#356](https://mgba.io/i/356), [#875](https://mgba.io/i/875), [#1847](https://mgba.io/i/1847))
+ - GBA BIOS: Implement dummy sound driver calls
+ - GBA BIOS: Improve HLE BIOS timing
+ - GBA BIOS: Fix reloading video registers after reset (fixes [#1808](https://mgba.io/i/1808))
+ - GBA BIOS: Make HLE BIOS calls interruptable (fixes [#1711](https://mgba.io/i/1711) and [#1823](https://mgba.io/i/1823))
+ - GBA BIOS: Fix invalid decompression bounds checking
+ - GBA DMA: Linger last DMA on bus (fixes [#301](https://mgba.io/i/301) and [#1320](https://mgba.io/i/1320))
+ - GBA DMA: Fix ordering and timing of overlapping DMAs
+ - GBA I/O: Green swap register should be readable
+ - GBA I/O: Ignore high bits on IME
+ - GBA Memory: Improve gamepak prefetch timing
+ - GBA Memory: Stall on VRAM access in mode 2 (fixes [#190](https://[#190](https://mgba.io/i/190)))
+ - GBA Memory: Improve robustness of Matrix memory support
+ - GBA Memory: Mark Famicom Mini games 22 through 28 as non-mirroring
+ - GBA Memory: Return correct byte for odd ROM open bus addresses
+ - GBA Memory: Improved AGBPrint emulation of edge cases (fixes [#1867](https://mgba.io/i/1867))
+ - GBA Memory: Fix masking of misaligned jumps
+ - GBA Serialize: Fix alignment check when loading states
+ - GBA SIO: Fix copying Normal mode transfer values
+ - GBA SIO: Fix Normal mode being totally broken (fixes [#1800](https://mgba.io/i/1800))
+ - GBA SIO: Fix deseralizing SIO registers
+ - GBA SIO: Fix hanging on starting a second multiplayer window (fixes [#854](https://mgba.io/i/854))
+ - GBA SIO: Fix Normal mode transfer start timing (fixes [#425](https://mgba.io/i/425))
+ - GBA Timers: Fix toggling timer cascading while timer is active (fixes [#2043](https://mgba.io/i/2043))
+ - GBA Video: Latch scanline at end of Hblank (fixes [#1319](https://mgba.io/i/1319))
+ - GBA Video: Fix Hblank timing
+ - GBA Video: Implement green swap (fixes [#1609](https://mgba.io/i/1609))
+ - GBA Video: Emulate sprite cycle limits in OpenGL renderer (fixes [#1635](https://mgba.io/i/1635))
+ - GBA Video: Fix OBJWIN erratic rendering in OpenGL renderer
+ - GBA Video: Fix x offset in 256-color BG mosaic (fixes [#1684](https://mgba.io/i/1684))
+ - GBA Video: Fix transposed BG mosaic parameters in GL renderer
+ - SM83: Emulate HALT bug
+ - SM83: Improve mid-M-cycle interrupts
+ - SM83: HALT should not consume an extra T-state
+
+### Other fixes
+
+ - 3DS: Fix thread cleanup
+ - All: Improve export headers (fixes [#1738](https://mgba.io/i/1738))
+ - Cheats: Fix indirect write cheats (fixes [#2026](https://mgba.io/i/2026))
+ - CMake: Fix build with downstream minizip that exports incompatible symbols
+ - CMake: Link with correct OpenGL library (fixes [#1872](https://mgba.io/i/1872))
+ - Core: Ensure ELF regions can be written before trying
+ - Core: Fix threading improperly setting paused state while interrupted
+ - Core: Fix loading ELF files that have unexpected empty program headers
+ - Core: Fix destroying an mVL with an invalid channel count
+ - Debugger: Don't skip undefined instructions when debugger attached
+ - Debugger: Close trace log when done tracing
+ - Debugger: Fix change watchpoints (fixes [#1947](https://mgba.io/i/1947))
+ - Debugger: Call CLI debugger system init
+ - FFmpeg: Fix some small memory leaks
+ - FFmpeg: Fix encoding of time base
+ - GB: Fix crash when changing ROM while in banked address space
+ - GB: Fix loading model overrides
+ - GB MBC: Force minimum SRAM size on rare MBCs that always have SRAM
+ - GB Serialize: Fix crash when loading pre-0.7 SGB savestates
+ - GB Video: Fix SGB video logs
+ - GB Video: Discard SGB packets in non-SGB mVLs
+ - GB Video: Fix deserializing negative LX state
+ - GB Video: Don't rendering negative batches
+ - GBA: Fix loading multiboot ELF files (fixes [#1949](https://mgba.io/i/1949))
+ - GBA: Fix loading subsequent save files (fixes [#2067](https://mgba.io/i/2067))
+ - mGUI: Don't attempt to preload files larger than can fit in RAM
+ - Qt: Force OpenGL paint engine creation thread (fixes [#1642](https://mgba.io/i/1642))
+ - Qt: Fix static compilation in MinGW (fixes [#1769](https://mgba.io/i/1769))
+ - Qt: Fix a race condition in the frame inspector
+ - Qt: Load/save bytes from memory viewer in the order visible (fixes [#1900](https://mgba.io/i/1900))
+ - Qt: Fix running proxied video if it gets pushed to the main thread
+ - Qt: Fix game display sometimes disappearing after closing load/save state screen
+ - Qt: Fix cancelling pausing before the frame ends
+ - Qt: Fix gamepad event dispatching (fixes [#1922](https://mgba.io/i/1922))
+ - Qt: Pre-attach GDB stub when launching with -g (fixes [#1950](https://mgba.io/i/1950))
+ - Qt: Fix crash when editing shortcuts with none selected (fixes [#1964](https://mgba.io/i/1964))
+ - Qt: Fix crashing when no OpenGL context can be obtained
+ - Qt: Fix issues with I/O viewer not properly synchronizing state
+ - Qt: Fix loading a new game crashing on Wayland (fixes [#1992](https://mgba.io/i/1992))
+ - Qt: Fix inability to clear hat bindings
+ - SM83: Simplify register pair access on big endian
+ - SM83: Disassemble STOP as one byte
+ - Switch: Fix GB game height in pixel accurate mode (fixes [#2073](https://mgba.io/i/2073))
+ - Wii: Fix crash on unloading irregularly sized GBA ROMs
+
+### Miscellaneous
+
+ - 3DS: Use "wide mode" where applicable for slightly better filtering
+ - 3DS: Batch directory reads
+ - Core: Add savedataUpdated callback
+ - Core: Add shutdown callback
+ - Core: Rework thread state synchronization
+ - Core: Improve support for ROM patch cheats, supporting disabling overlapping patches
+ - Core: Adding to library is now recursive
+ - GB: Allow pausing event loop while CPU is blocked
+ - GB: Add support for sleep and shutdown callbacks
+ - GB: Redo double speed emulation (closes [#1515](https://mgba.io/i/1515))
+ - GB: Support loading CGB-on-AGB boot ROM
+ - GB Audio: Add channel 4 batching back (fixes [#1313](https://mgba.io/i/1313))
+ - GB Core: Return the current number of banks for ROM/SRAM, not theoretical max
+ - GB I/O: Implement preliminary support for PCM12/PCM34 (closes [#1468](https://mgba.io/i/1468))
+ - GB MBC: Remove unused SRAM size
+ - GBA: Allow pausing event loop while CPU is blocked
+ - GBA BIOS: Division by zero should emit a FATAL error
+ - GBA Cheats: Allow unlimited ROM patch-type codes per set
+ - GBA Video: Convert OpenGL VRAM texture to integer
+ - GBA Video: Skip attempting to render offscreen sprites in OpenGL
+ - GBA Video: New GL palette approach, no more batch splitting on palette edits
+ - GBA Video: Avoid integer division using reciprocal tricks
+ - Debugger: Keep track of global cycle count
+ - FFmpeg: Add looping option for GIF/APNG
+ - FFmpeg: Add CRF support for applicable codecs
+ - mGUI: Show battery percentage
+ - mGUI: Skip second scan loop when possible
+ - mGUI: Improve loading speed (fixes [#1957](https://mgba.io/i/1957))
+ - Qt: Renderer can be changed while a game is running
+ - Qt: Add hex index to palette view
+ - Qt: Add transformation matrix info to sprite view
+ - Qt: Memory viewer now supports editing decimal values directly (closes [#1705](https://mgba.io/i/1705))
+ - Qt: Add copy button to GB printer dialog
+ - Qt: Window title updates can be disabled (closes [#1912](https://mgba.io/i/1912))
+ - Qt: Redo OpenGL context thread handling (fixes [#1724](https://mgba.io/i/1724))
+ - Qt: Discard additional frame draws if waiting fails
+ - Qt: Unify monospace font usage
+ - Qt: Add button to jump to log settings
+ - Qt: Use relative paths in portable mode when applicable (fixes [#838](https://mgba.io/i/838))
+ - Qt: Better initial shortcut editor column sizes
+ - SDL: Fall back to sw blit if OpenGL init fails
+ - Switch: Optimize font rendering (fixes [#2078](https://mgba.io/i/2078))
+ - Switch: Allow switching between CPU and GPU renderers without reloading
+ - Util: Reset vector size on deinit
+ - VFS: Change semantics of VFile.sync on mapped files (fixes [#1730](https://mgba.io/i/1730))
+
+## Downloads
+
+Get it now in the [Downloads]({{ site.baseurl }}/downloads.html) section. Binaries are available for Windows, Ubuntu, macOS, Nintendo Switch, 3DS, Wii, and PlayStation Vita, and the source code is available for all other platforms.
+
+If you enjoy using mGBA and wish to give back, there is a list of ways to donate on the [donations page]({{ site.baseurl }}/donate.html), including an [mGBA Patreon](https://www.patreon.com/mgba).
