@@ -18,7 +18,7 @@ During the latter half of the year I finally started a push for features, and re
 Remember, mGBA currently only has _one_ major developer, so things can take quite a long time to finish, and if I'm not actively working on it any given week then there isn't progress made that week.
 While this did lead to 0.9 being effectively "coming soon" for many, many months in a row, it has led to what I believe to be an extremely polished release, so I'm now happy to announce that mGBA 0.9.0 is done and out.
 
-Though it has dozens and fixes and tweaks under the hood, there are some pretty major features to announce, including full e-Reader support, some new enhanced utilities such as a save type converter and a bug report tool, and more.
+Though it has dozens and fixes of tweaks under the hood, there are some pretty major features to announce, including full e-Reader support, some new enhanced utilities such as a save type converter and a bug report tool, and more.
 The most exciting features added in this release are detailed after the cut, along with a full change log.
 <!--more-->
 
@@ -33,7 +33,7 @@ This approach requires per-game hacks for each of the 3 versions of the e-Reader
 As an accuracy-focused emulator, this type of bodge was completely unacceptable to me so I decided to dive in and do it right.
 
 Work on e-Reader support in mGBA actually started several years ago, but hit a roadblock when I couldn't figure out how exactly the dotcode images appeared when scanned by the game.
-Documentation was somewhat sparse, and as with a lot of the GBA documentation out there tended to gloss over many of the fine details.
+Documentation was somewhat sparse, and as with a lot of the GBA documentation out there it tended to gloss over many of the fine details.
 I assumed figuring this out would require writing difficult hardware tests, so I decided to push it off until the next release when I'd have time to write those tests.
 And then when I didn't write those tests in time for the next release it got pushed out again. And again. And again.
 Unfortunately this meant that in the meantime work on the feature languished despite a significant amount already being done.
