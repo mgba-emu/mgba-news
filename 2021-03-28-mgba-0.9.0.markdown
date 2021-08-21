@@ -11,14 +11,14 @@ tags:
 ---
 After the seemingly longest year possible, mGBA 0.9.0 is finally here.
 It's been a difficult year for the entire world and that definitely had an impact on development this cycle too.
-While progress marched on with mGBA for the first few months of last year, I was able to release 0.8.1 through 0.8.3 picking up most of the bug fixes I made along the way towards 0.9.
-After several months there were lots changed under the surface, but not many user visible new features.
-In the interest of releasing an properly exciting new version of mGBA I decided to hold onto releasing 0.9 until it was polished and featureful.
+As progress marched on with mGBA for the first few months of last year, I was able to release 0.8.1 through 0.8.3 picking up most of the bug fixes I made along the way towards 0.9.
+After several months there were lots changes under the surface, but not many new user-visible features.
+In the interest of releasing a properly exciting new version of mGBA, I decided to hold off on releasing 0.9 until it was polished and featureful.
 During the latter half of the year I finally started a push for features, and released 0.8.4 as the last of the 0.8 line.
 Remember, mGBA currently only has _one_ major developer, so things can take quite a long time to finish, and if I'm not actively working on it any given week then there isn't progress made that week.
 While this did lead to 0.9 being effectively "coming soon" for many, many months in a row, it has led to what I believe to be an extremely polished release, so I'm now happy to announce that mGBA 0.9.0 is done and out.
 
-Though it has dozens and fixes of tweaks under the hood, there are some pretty major features to announce, including full e-Reader support, some new enhanced utilities such as a save type converter and a bug report tool, and more.
+Though it has dozens and fixes and tweaks under the hood, there are some pretty major features to announce, including full e-Reader support, some new enhanced utilities such as a save type converter and a bug report tool, and more.
 The most exciting features added in this release are detailed after the cut, along with a full change log.
 <!--more-->
 
@@ -50,7 +50,7 @@ Though I cannot link to card scans for legal reasons, I do intend to release too
 ## Improved user tools
 
 mGBA 0.9 also introduces several new and improved tools for users.
-Though most users may never need any of these mGBA strives to provide a great experience for everyone from first time GBA gamers to seasoned ROM hackers, speedrunners, and even game and homebrew developers.
+Though most users may never need any of these mGBA, strives to provide a great experience for everyone from first time GBA gamers to seasoned ROM hackers, speedrunners, and even game and homebrew developers.
 So I'm glad to announce there are some new and improved tools in this release to fill some gaps I'd observed in user experience.
 
 ### Bug report tool
@@ -63,9 +63,9 @@ Unfortunately, one of the most frustrating parts of guaranteeing a good user exp
 Often there's a back and forth of requesting more info from the user, who may or may not reply, and even if they do it can drag out for weeks as enough information is gathered to finally track down the root cause of the bug.
 But what if mGBA could automatically gather all of the pertinent information for you and stuff it into one easy to attach file in the bug report?
 
-In the interest of easing along the process for everyone involved there is now a tool that does just that:
+In the interest of easing along the process for everyone involved, there is now a tool that does just that:
 it gathers a bunch of information about the computer in question, what games are running, and the user's configuration, zips it up and directs you to the bug reporting page where you can file a new bug with the zip attached.
-It also can optionally include the save game and a current save state of the currently loaded game.
+It can also optionally include the save game and a current save state of the currently loaded game.
 Further, in the interest of privacy, it automatically strips out the name of the home directory and lets you review and edit the information it collects before it creates the zip, just in case you have more information you wish to redact for whatever reason.
 Hopefully this new tool will expedite fixing bugs since the back and forth of requesting info will be mostly eliminated!
 Though this tool is not yet available on homebrew ports, I hope to add support there too in future releases.
@@ -98,7 +98,7 @@ This release adds a lot of enhancements to debugging and even some new tools.
 Though the visual debugger isn't done yet, a bunch of changes have happened behind the scenes in preparation for future work on it.
 Here's a quick explanation of several of the bigger additions and changes.
 
-First and foremost, initial support for stack frame tracking was added by first-time contributor ahigerd.
+First and foremost, initial support for stack frame tracking was added by first-time contributor [ahigerd](https://github.com/ahigerd).
 This functionality is currently not heavily optimized and is therefore off by default and must be enabled per session.
 To enable it, first open the command line debugger (in the Qt version this is under Tools > Open debugger console), and type `stack` to see the list of supported tracing modes.
 Currently there are five, though at this time they are only supported on the GBA:
@@ -116,7 +116,7 @@ Though nothing like what the eventual scripting system will be, this lets you pu
 Currently some commands don't work when run this way but that will be fixed in future releases.
 
 Further, while you could previously use symbols loaded for a game as addresses in the debugger, the disassembler now also will resolve addresses back to symbol names.
-This means that branches will now say what function it's calling, and global variable accesses will show up as well.
+This means that branches will now say what function they're calling, and global variable accesses will show up as well.
 In future releases I would like to add richer support for debugging symbols, letting you access local variables, line numbers, and more, but that's still pending.
 
 One of the goals I had for mGBA 0.9 was to bring Game Boy debugging up to snuff.
@@ -144,12 +144,12 @@ Oh right.
 
 For a long time the only way to play GameCube games that linked with GBA games was by using newer versions of VBA, like VBA-M.
 However, it doesn't even work in the latest version of VBA-M (at the time of writing, 2.1.4), so with mounting complaints from all sides I bit the bullet and finally polished up the long-stagnant Dolphin linking branch.
-Much like with e-Reader support work on this started several years ago but stalled out when I hit roadblocks.
+Much like with e-Reader support, work on this started several years ago but stalled out when I hit roadblocks.
 In this case it could connect in some cases but seemed generally unreliable in comparison to VBA-M's connection.
 Somewhat disappointed by how VBA-M had been handling updates and attempts to fix the link I decided that I should try to revive the branch and see if I could get it working well.
 Much to my surprise many of the issues that had plagued it previously just seemed to have resolved in the meantime, pointing to the issues being Dolphin-side and not mGBA-side.
 
-After polishing the feature until it practically sparkled it's now merged and ready for general usage.
+After polishing the feature until it practically sparkled, it's now merged and ready for general usage.
 You will need a copy of the GBA boot ROM (sometimes known as the "BIOS") for this feature to work with most games.
 There are several ways to obtain this file, though I can't provide it for legal reasons.
 Once you have the file you can set it up under Settings > BIOS and you'll be ready to go.
@@ -160,9 +160,9 @@ You can also enter the IP address of a computer if Dolphin is running on another
 <img alt="The Connect to Dolphin dialog is pretty simple" srcset="/assets/dolphin-dialog.png 2x">
 
 While working on this feature I also discovered several shortcomings in the protocol Dolphin uses to communicate with GBA emulators.
-I patched some some of these the best I could and submitted the improvements to Dolphin, but some of them will need much more thorough changes.
+I patched some of these the best I could and submitted the improvements to Dolphin, but some of them will need much more thorough changes.
 I plan to investigate ways to go about doing this in the future, but for now such changes were beyond the scope of this release.
-As such some games still have some connection issues or can be glitchy, but there will be fixes coming down the line.
+As such some games still have occasional connection issues or can be glitchy, but there will be fixes coming down the line.
 
 {: .gallery }
 ![Finally together, mGBA and Dolphin](/assets/ffcc.jpg)
