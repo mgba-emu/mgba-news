@@ -14,7 +14,7 @@ Some of the features that will be in the initial version are:
 
 * A solid ARM7TDMI core emulator with near-full Game Boy Advance hardware emulation.
 * Great emulation. Despite the fact that this is the initial version, most games work quite well, if not perfectly, already.
-* Reliable savetype detection. Some games may still need work to detect saves, so please feel free to [file a bug]({{ site.baseurl }}/bugs.html) if a game does not save properly.
+* Reliable savetype detection. Some games may still need work to detect saves, so please feel free to [file a bug]({{ site.baseurl }}/i/) if a game does not save properly.
 * Real-time clock support for the games that use the RTC.
 * Custom BIOS, removing the need to use a separate BIOS file. A separate BIOS file can still be used, if desired, for additional accuracy.
 * Fast. I've measured it at roughly 30% faster than latest VBA-M at 0 frameskip.
