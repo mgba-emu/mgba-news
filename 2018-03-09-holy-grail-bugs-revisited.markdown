@@ -43,7 +43,7 @@ Further, if this behavior is incorrectly emulated by assuming that asserting and
 
 Lior also discovered that interrupt timing can appear to be delayed by a cycle while halted, but it depends on both the specific model of Game Boy and specific interrupt raised.
 
-While it may sound strange for an interrupt to be delayed by one cycle, the exact reason for such a thing happening is fairly simple. The LR35902 processor used in the Game Boy has two different types of timings: M-cycles, which are the instruction-level clock and occur at quarter of the master clock frequency, and T-states, which occur every master clock cycle and are sometimes referred to as sub-cycles due to the fact that they make up the separate steps taken by instructions. While an M-cycle can be thought of as the CPU performing one complete task, e.g. adding two numbers, T-states are even lower level. For addition, it may look something like this:
+While it may sound strange for an interrupt to be delayed by one cycle, the exact reason for such a thing happening is fairly simple. The SM83 processor used in the Game Boy has two different types of timings: M-cycles, which are the instruction-level clock and occur at quarter of the master clock frequency, and T-states, which occur every master clock cycle and are sometimes referred to as sub-cycles due to the fact that they make up the separate steps taken by instructions. While an M-cycle can be thought of as the CPU performing one complete task, e.g. adding two numbers, T-states are even lower level. For addition, it may look something like this:
 
 - Load value in register `B` into the [arithmetic logic unit](https://en.wikipedia.org/wiki/Arithmetic_logic_unit).
 - Load value in register `C` into the ALU.

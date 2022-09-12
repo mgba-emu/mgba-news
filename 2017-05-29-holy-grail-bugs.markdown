@@ -56,7 +56,7 @@ However, there are two very noteworthy bugs relating to this register that are f
 
 The PPU triggers the STAT IRQ on the CPU itself by adjusting the level of the STAT IRQ line — changing one signal from a 0 to a 1[^line-level] to tell the CPU that a STAT IRQ condition has been fulfilled and an interrupt should occur. STAT IRQs are [edge-triggered](https://en.wikipedia.org/wiki/Signal_edge), meaning that the interrupt occurs when the signal changes from a 0 to a 1, and not whenever a signal is 1. This prevents an interrupt from occurring a second time while the signal is 1 and the interrupt has already been acknowledged by the system.
 
-[^line-level]: Both the CPU and the PPU are contained within the same chip (the LR35902), so it's hard to say if it's a rising edge or falling edge without die shots. However, for simplicity I'm describing it as rising edge.
+[^line-level]: Both the CPU and the PPU are contained within the same chip (labelled as either CPU DMG, CPU MGB, CPU CGB, or CPU AGB depending on the model), so it's hard to say if it's a rising edge or falling edge without die shots. However, for simplicity I'm describing it as rising edge.
 
 Edge triggers are very common in electronics engineering. Level-triggered interrupts, as mentioned, can cause interrupts to occur multiple times even if the state hasn't changed[^ds-gxfifo-irq], making edge triggers far more common for this. However, in this case by trying to prevent the IRQ from occurring more than once it introduced a bug where IRQs can get missed.
 
