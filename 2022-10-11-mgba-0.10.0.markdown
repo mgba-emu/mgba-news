@@ -1,0 +1,318 @@
+---
+layout: post
+title: "mGBA 0.10.0"
+date: 2022-10-11
+toc: yes
+authors:
+- endrift
+tags:
+- announcement
+- release
+---
+Been a bit, huh?
+It's been 10 months since the last minor release, and over a year and a half since the last major release, but progress definitely has not stopped in the meantime.
+Although a lot of the changes in this version are under the hood, cleaning up a lot of older code, paying down [technical debt](https://en.wikipedia.org/wiki/Technical_debt) and fixing bugs, there are still some major new features in this release.
+Maybe we spent a bit too long on the polish, though, since this release was intended to be released months ago.
+Note also that mGBA is written primarily by [a single developer](https://github.com/endrift), so at times progress can stagnate; after all, mGBA has a [bus factor](https://en.wikipedia.org/wiki/Bus_factor) of one.
+Fortunately, the extra-long wait is over, and mGBA 0.10.0 is here now!
+
+<!--more-->
+Without further ado, let's get to the feature list, as this first one is big.
+
+## Lua scripting support
+
+The biggest feature in this release is preliminary support for Lua scripting.
+For those of you who are familiar with what scripting brings to emulation, please be aware that there are a lot of features still forthcoming.
+As such, what is possible to do with scripting is currently somewhat limited.
+For those of you who aren't, here are some quick ideas.
+
+Ever wanted to keep track of which Pokémon are in your party, their stats, and more, with an external tracker that auto-updates as you play the game?
+What about feeding text into an automated translation utility to get a comically bad auto-translation to compare against the comically bad official, in-house translation?
+And how about keeping track of the RNG state so you can develop RNG manipulation tricks for speedruns?
+All of these ideas, and more, have been implemented in various other emulators with Lua scripting before, and now with Lua scripting in mGBA it'll be possible to start writing similar scripts for mGBA.
+
+To access scripting, click on the Scripting... option under tools.
+By default, there's not much to look at; it's just a window with three empty panes and a text entry field at the bottom.
+Until you load a script, none of these panes will actually do anything, though you can enter Lua directly into the text entry field and run it.
+
+The left pane is a list of text buffers that have been created by scripts, and the contents of those buffers are displayed on the top pane.
+You can change which text buffer you're currently viewing simply by clicking on its name in the list.
+The output log, which is shared between all scripts, is shown on the bottom pane.
+None of these do much of anything without any script loaded, but after running a script they can be used to display information to the user.
+
+{: .gallery}
+![The Scripting window](/assets/scripting-window.png)
+
+There are also a handful of example scripts that are included with mGBA.
+You can find them in the scripts folder.
+There's also automatically generated API documentation located [on its own page]({{ site.base_url}}/docs/scripting.html).
+
+As of this release there is no way to display any sort of graphical information in-emulator yet: no overlays, no separate windows, nothing.
+Only textual and network interaction are supported in the initial release.
+Although this feature was originally looking like it was going to get pushed back to 0.11, I got in enough early work on it that I decided to make a push to complete it for 0.10.
+That said…it's also a big part of why 0.10 is so late.
+There's plenty more planned for the future, but I had to cut a release sooner or later, so that's it until 0.11.
+
+## Built-in Updater
+
+One of the more commonly requested features for mGBA is to have an auto-updater.
+Many major emulators these days are getting auto-updaters, especially the ones that update frequently.
+This release introduces an updater that can check for and automatically download and set up new versions for the user.
+The updater itself is located in the settings, and can be run manually, or configured to check for updates every time mGBA starts.
+
+Though mGBA releases are fairly rare, mGBA is actively developed and development builds are updated along with these.
+As such, the new updater features two update channels: stable, for releases like 0.10.0, and later 0.10.1, 0.11.0, etc., when they come out, and development, which is updated with every single code change.
+Currently, the updater is supported on the desktop version, though the auto-setup does not work on standard Linux builds, as that's generally managed differently on Linux.
+
+{: .gallery}
+![Updater settings](/assets/updater-settings.png)
+
+Believe it or not, while 0.10 is the first version to feature an updater for the whole program, the groundwork for adding an updater has been in the works for several years!
+Notably, parts of it were first used in the BattleChip Gate feature in 0.8 to download updated chip images.
+Though currently only the desktop version has a built-in updater, the homebrew ports will support it in the future too.
+
+## Game Boy enhancements
+
+Though less exciting for many users than the aforementioned features, this release also includes some commonly requested features for the Game Boy core.
+
+### Palette presets
+
+Nostalgic for the color palette of Pokémon Red on your Game Boy Color?
+How about Super Mario Land on the Super Game Boy?
+An often-requested feature, mGBA now includes all of the color palettes that could be selected on the Game Boy Color and Super Game Boy, along with the defaults used in the various games that had built-in support for these palettes.
+Further, you can manually select these palettes, plus a few additional palettes meant to mimic the colors on the original Game Boy, the Game Boy Pocket, and even the Game Boy Light.
+These can be selected in settings on both the desktop and homebrew versions.
+
+{: .gallery}
+![Super Mario Land title screen in grayscale](/assets/sml-gray.png)
+![Super Mario Land title screen with garish colors](/assets/sml-ugly.png)
+![Super Mario Land title screen in DMG green](/assets/sml-dmg.png)
+![Super Mario Land title screen in INDIGLOⓡ](/assets/sml-gb-light.png)
+
+In mGBA 0.9 there were no presets and the default was just grayscale. Some new presets included in 0.10 range from nostalgic to extra bright.
+{: .gallery-caption}
+
+### Super Game Boy Color
+
+If you've never heard of the Super Game Boy Color, well, there's a good reason for that. It doesn't exist.
+Fortunately, [not existing isn't an impediment for emulator developers](https://en.wikipedia.org/wiki/Fantasy_video_game_console) and hasn't stopped emulators from implementing it.
+So then, what is the Super Game Boy Color?
+While most features of the Super Game Boy are superseded by the Game Boy Color, the biggest feature that still isn't present is dynamic borders.
+
+{: .article-aside}
+![Crystal Clear](/assets/crystal-clear.png)
+Crystal Clear uses the borders to display party, badges and 'dex info
+
+Although some emulators have an option to use a single Super Game Boy border in Game Boy Color mode in games that support both modes, this doesn't actually work by running both modes at the same time.
+In fact, it turns out these two modes in practice are mutually exclusive—and as such, there are almost no games that will attempt to upload Super Game Boy borders while in Game Boy Color mode.
+Turns out, the option to use borders in GBC mode works by booting the game in SGB mode invisibly, waiting for the game to upload a border, and then restarting the game in Game Boy Color mode with the border displayed.
+Since the whole reboot process is invisible to the user, lots of users reasonably, but erroneously assume that this is actually just running in either pure Game Boy Color mode or some hybrid mode.
+There is one caveat however: since a Super Game Boy game can actually upload a border at any time, it can dynamically change the border while the game is running, but the SGB-then-GBC-reboot mode cannot support this.
+
+Super Game Boy Color mode removes this restriction, as now ROM hacks can upload borders at any time as well.
+This will not affect most, if any, existing games, as they tend to assume the modes are mutually exclusive.
+Going forwards, mGBA may implement the SGB-then-GBC-reboot mode, SGBC mode is already implemented in some ROM hacks, such as Crystal Clear, which uses it to display information about your party and game progress.
+
+### Improved audio emulation
+
+mGBA's Game Boy audio emulation has been a pain point for many years.
+While work has progressed on fixing various inaccuracies regarding edge cases, which the Game Boy's audio processor is absolutely rife with, one of the limiting factors in improving the audio quality has been [audio sampling](https://en.wikipedia.org/wiki/Sampling_%28signal_processing%29).
+
+Internally, mGBA uses a sample rate of exactly 32768 Hz, which is the default sample rate on the GBA.
+Due to some widely criticized design measures used in the GBA, audio is output at an entirely digital level from the processor, one bit every clock cycle, and smoothed out by a rudimentary [DAC](https://en.wikipedia.org/wiki/Digital-to-analog_converter) to make the final audio waveform.
+Since the clock rate of the GBA is 16.78 MHz, a 32768 Hz "internal" sample rate equates to sending 512 cycle long [pulse-width modulated](https://en.wikipedia.org/wiki/Pulse-width_modulation) (equivalent to about 9 bit depth) samples 32768 times per second.
+
+That doesn't sound great, especially since GB audio channels, which are present on the GBA as well, could change within that 512 cycle period.
+This can result in terrible [aliasing](https://en.wikipedia.org/wiki/Aliasing), leading to audible artifacts.
+And it turns out, the GBA's sample rate is _dynamic_ and most GBA games actually _change_ this sample rate to 65536 Hz.
+Further, the Game Boy's audio processor doesn't operate at a sample level the same way as the GBA does.
+It actually has the ability to directly output a (roughly) analog signal every cycle, which means the theoretical sample rate of the Game Boy is orders of magnitude above 32768 Hz, compounding the GBA-specific issues.
+Taking all this into account, it meant that fixing this problem wasn't as simple as just increasing the internal sample rate.
+Further, there were several parts of mGBA that internally assumed samples would always be generated at 32768 Hz, so having to shake those out alone wasn't trivial.
+
+Another surprisingly major problem: speed.
+The audio subsystems of the GB and GBA cores are the third most intensive components of these cores, after the PPU and CPU, so running it twice as often, or more, is effectively a non-starter due to how much slower it would make the cores overall.
+One of the biggest tricks mGBA uses to make things faster is batching: instead of doing something twice as often, do twice as much in a single time running, or some other multiple.
+While this doesn't sound like it should help that much, it can reduce the overhead in a bunch of different ways.
+Unfortunately, I wasn't able to match the old speed of the audio subsystem in 0.9, but I've tried hard to make it nearly as fast, and I'll be working on more optimizations in the future.
+
+After implementing the fairly extensive changes needed, I tested a few games.
+The audio is cleaner sounding in general, and while that's a subjective measure, I decided to try and run a more objective test.
+There's a project designed specifically for this sort of thing, called [MDFourier](https://junkerhq.net/MDFourier/), which can compare recordings of an emulator to recordings from hardware and give actual metrics on how close or far it is.
+Though it's technically for comparing different models of the same system, there's nothing stopping you from calling mGBA's GB core a model of Game Boy.
+I guess.
+If you really wanted to.
+Regardless, the difference between spectrograms itself is striking.
+
+{% gallery 3 %}
+{% galimage mdfourier-freq-ref.png Spectrogram recorded from a DMG, the original model of Game Boy %}
+{% galimage mdfourier-freq-before.png Spectrogram of mGBA before the changes—a mess with tons of frequencies present that shouldn't be, largely due to heavy aliasing, as well as an entirely missing high range (which is mostly above human hearing) %}
+{% galimage mdfourier-freq-after.png Spectrogram of mGBA after the changes—a lot cleaner, though the high range is mostly still missing, and there's still some aliasing and additional frequencies present %}
+{% endgallery %}
+
+As an actually listenable example, I recorded and compared the intro sequence of The Legend of Zelda: Link's Awakening, both before and after the change.
+While for the most part the differences were small, there are definitely some noticeable changes, leading to an overall cleaner sound.
+The clips are embedded below, in case you want to compare yourself before downloading.
+
+{: .gallery}
+![](/assets/lozla-spectro-diff.png)
+
+Spectrograms of portions of the music in mGBA, before and after the change. Note that the "after" spectrogram is visibly lacking several subharmonics that were created by aliasing and gave it a "muddy" sound.
+{: .gallery-caption}
+
+<div style="text-align: center">
+  <div style="display: inline-block">
+    <audio controls preload="none">
+      <source src="/assets/lozla-before.mp3" type="audio/mpeg"/>
+    </audio>
+    <p>Audio before the change</p>
+  </div>
+  <div style="display: inline-block">
+    <audio controls preload="none">
+      <source src="/assets/lozla-after.mp3" type="audio/mpeg"/>
+    </audio>
+    <p>Audio after the change</p>
+  </div>
+</div>
+
+Now that this major shortcoming has been addressed, cleaning up the edge cases and other audio glitches in mGBA should lead to much less noticeable advances in quality.
+There's still plenty of work to be done, but this was the biggest single impediment detracting from Game Boy audio quality in mGBA.
+
+### Improved mapper support
+
+Also new in 0.10 is improved support for a small handful of mappers, mostly with support for a few unlicensed mappers.
+
+The officially-licensed HuC-3 mapper, used in the Hudson series [Ropobon](https://en.wikipedia.org/wiki/Robopon_Sun%2C_Star%2C_and_Moon_Versions) and Pocket Family, has a real-time clock, much like the MBC3 mapper used in Pokémon gen 2, but has additional features such as a buzzer that can be set off by the game.
+Through some [ongoing research](https://gbdev.gg8.se/forums/viewtopic.php?id=744) I've been doing, and reverse engineering of the games by the [SameBoy](https://sameboy.github.io/) developer, these features are now well-understood enough to be implemented, and are in mGBA 0.10.
+Just in case you wanted to play a laggy Pokémon clone, but with robots.
+
+{: .gallery}
+![Robopon title screen](/assets/robopon-title.png)
+![Robopon battle screen](/assets/robopon-battle.png)
+
+This sure is a Pokémon clone…
+{: .gallery-caption}
+
+Another officially-licensed mapper that's been a thorn in every GB emulator's side, colloquially known as TAMA5 due to the marking on the chip, is used in exactly one game: Game de Hakken!! Tamagotchi Osucchi to Mesucchi.
+That's a bit of a mouthful, so being the third Tamagotchi game for the Game Boy, it's usually just called Tamagotchi 3.
+Unless you follow weird Game Boy games, you've probably never heard of this game.
+It was never released outside of Japan, and was based on the [similarly named Tamagotchi series](https://tamagotchi.fandom.com/wiki/Tamagotchi_Osutchi_and_Mesutchi), also never released outside of Japan.
+
+{: .gallery}
+![Real Time mode before](/assets/tama3-before.png)
+![Real Time mode after](/assets/tama3-after.png)
+
+I have no idea what time 1:ꞨꞨ is. Now you can set it to a real time, and if you're lucky, pacify the screaming baby.
+{: .gallery-caption}
+
+While the basic functionality has been relatively well documented for a few years, the game also has a real-time clock that had never been successfully reverse engineered.
+Tamagotchi 3 has two modes of operation: Tamagotchi Time, which ticks fairly quickly and only keeps track of time while the game is running, and Real Time, which is exactly what it sounds like.
+Since the RTC had never been successfully reverse engineered, no emulator properly supported the RTC.
+Following [literally 5 years](https://gbdev.gg8.se/forums/viewtopic.php?id=469) of (admittedly sporadic) research on my part, the RTC is now well-understood enough for Real Time mode to work in this single game.
+Just in case you wanted to play this one specific Tamagotchi game that's only in Japanese.
+
+There's also new support when it comes to unlicensed mappers used in bootleg titles.
+Continuing with porting the support for unlicensed mappers from [hhugboy](https://github.com/tzlion/hhugboy), there's now support for Sachen MMC1 and MMC2, as well as NT's newer mapper type.
+Though for the vast majority of users this support is wholly irrelevant, if mGBA only had support for things relevant to most users it wouldn't be where it is today.
+One of the goals of mGBA is making as much as possible playable, for the sake of preservation, and even that crust at the bottom of the barrel is worth preserving…I guess…maybe.
+
+{: .gallery}
+![Robopon title screen](/assets/pokemon-mewtwo-bootleg.png)
+![Robopon battle screen](/assets/digimon-bootleg.png)
+
+Nothing says Kwality&trade; like these font choices!
+{: .gallery-caption}
+
+On that note, the author of hhugboy has defined a new format called GBX.
+GBX is designed primarily for unlicensed ROMs and contains additional information about the ROM mappers, similar to how iNES headers define information about the mappers for NES ROMs.
+This is generally unnecessary for officially licensed Game Boy games as the internal Game Boy ROM header specifies which mapper it uses, but bootleg games don't tend to follow those conventions.
+This means that quite often special heuristics are needed to determine which unlicensed mapper a given ROM uses.
+Heuristics are notably imperfect, however, and for some of these mappers, detection is done at a per-ROM level.
+When detection is that error-prone, every time another previously-undumped bootleg is released, the heuristics need to be updated.
+
+This isn't really sustainable, so GBX takes another approach.
+While attaching other metadata to the file means it's no longer just a raw dump, this new format with an additional footer works around this per-ROM detection by simply telling the emulator what mapper is in use to bypass the need for heuristics at all.
+mGBA 0.10.0 adds support for this GBX format, though not all mappers defined in the GBX specification are currently supported. More will be [coming in future releases](https://mgba.io/i/2437).
+
+## New builds
+
+As mGBA has gotten more popular, there has been some demand for additional binaries for various platforms.
+While this version doesn't add support for any new platforms, it does add two new precompiled binary versions for existing platforms.
+
+### Modern macOS
+
+![](/assets/macos-logo.svg){: .article-aside }
+
+If you've used mGBA on macOS any time in the past 4 or so years, you've probably noticed that the macOS version has been getting somewhat…crusty.
+It doesn't support dark mode, it doesn't have an Arm (sorry, I mean "Apple silicon") native version, etc., due to being built with a very old version of the SDK.
+However, due to threading OpenGL seemingly being intentionally broken on newer macOS SDKs, I couldn't use a newer version of the SDK to be more in-line with modern features of macOS.
+
+I spent a lot of time attempting various workaround to this problem, and eventually managed to come up with a slightly janky solution.
+It seems to have some minor performance and flickering issues on some Macs, however, which I've as of yet been unable to resolve.
+Over the past few months I've worked on bringing up a modern version of the macOS port, which is now available as a Universal Binary and supports macOS versions 10.13 and newer.
+Most people are on a supported version of macOS, so you can grab this version.
+However, for the handful of users on very old macOS, the "legacy" version is still supported (for now) on macOS versions 10.9 and newer.
+
+### Linux AppImage
+
+![](/assets/appimage-logo.svg){: .article-aside }
+
+While mGBA has provided builds for Ubuntu releases for several years, Ubuntu is far from the only Linux distro.
+However, even just building several Ubuntu versions at the same time is a bit of a strain on the build infrastructure, so building separate versions for Debian, Fedora, CentOS, Arch, Manjaro, and whatever other distros people might want isn't really feasible.
+
+Fortunately, there are a few solutions for having pre-packaged Linux binaries that run on several platforms.
+The simplest one of these appears to be AppImage, so I spent some time wrangling a builder for AppImages that can be run on a wide variety of distros, and AppImages are now built automatically for both stable and development channels.
+Best of all, since it doesn't require special privileges to install them, they work with the new updater too!
+
+## Cheat codes in the homebrew ports
+
+![](/assets/gameshark.webp){: .article-aside }
+
+For years now, every few months someone will ask "how do I access cheat codes on the 3DS?" or on Vita, or on Wii, or on Switch.
+And for these same years, the answer has always been "it's complicated, but you probably shouldn't."
+While you could use cheats on the homebrew ports, it was tedious to set up, required exporting a file from the desktop version, and you couldn't actually update or view the cheats from the homebrew version.
+Obviously, this was unsatisfactory for everyone, so 0.10 brings along the long-since planned cheat interface for the homebrew ports.
+
+To use the new cheats interface, start a game, open the menu, and select the new Cheats submenu.
+Much like on the desktop version, there's an option to add a new cheat set, and from there you can add lines to the cheat set in question.
+The cheats will be automatically saved to an associated .cheats file, and automatically loaded on next run.
+You can also enable or disable the cheat, view the current cheat's code, rename the cheat, or delete it.
+Further, .cheats files from the desktop version and the homebrew ports are compatible, so you can export or import them and share them between platforms.
+
+## Quality of life
+
+This release also polishes some existing features with new niceties. Some highlights are as follows:
+
+- Additional settings for handling mute, including for multiplayer windows, or when minimized
+- The accelerometers and gyroscopes in game controllers like DualShock/DualSense or Switch Pro Controller can be directly used in supported games, such as Kirby: Tilt 'n' Tumble and WarioWare: Twisted
+- Discord Rich Presence now supports displaying time elapsed in-game
+- GameShark Advance SP format save games can be imported using the existing save importing methods
+- Multiplayer windows will now by default have separate save game files per window: .sav for player 1, .sa2 for player 2, .sa3 for player 3, and .sa4 for player 4
+- A new RTC override type lets you use an offset from the computer's current time
+- A default Super Game Boy border is displayed before a game uploads its border
+- The settings dialog was cleaned up and rearranged to make things easier to find
+
+## What about 1.0?
+
+Some of you are probably wondering why mGBA went from 0.9 to 0.10 instead of 1.0. After all, that's not how math works!
+This is, however, how [semantic versioning](https://en.wikipedia.org/wiki/Software_versioning#Semantic_versioning) works, and there is a relatively well-defined set of criteria that has been laid out for what features and polish are required before releasing a 1.0 version:
+
+- Netplay ([codenamed]({{ site.baseurl }}/faq.html#glossary) mNP)
+- IDE-style debugging interface
+- A much-more polished user interface for the homebrew ports ([codenamed]({{ site.baseurl }}/faq.html#glossary) mGUI2)
+- A relatively stable API for developers wishing to integrate mGBA as a library (also known as libmgba), which will benefit projects that integrate libmgba like Dolphin and BizHawk
+- Documentation on both libmgba and the more obscure features of mGBA
+- Scripting support
+
+As mGBA 0.10 adds scripting support, albeit only preliminary scripting support, this checks off that item from the checklist.
+Subsequent releases, such as 0.11, should check off more items until 1.0 comes out with the list completed.
+
+## Changelog
+
+TKTK
+
+## Downloads
+
+Get it now in the [Downloads]({{ site.baseurl }}/downloads.html) section. Binaries are available for Windows, Ubuntu, other Linux distros (via AppImage), macOS, Nintendo Switch, 3DS, Wii, and PlayStation Vita, and the source code is available for all other platforms.
+
+If you enjoy using mGBA and wish to give back, there is a list of ways to donate on the [donations page]({{ site.baseurl }}/donate.html), including an [mGBA Patreon](https://www.patreon.com/mgba).
