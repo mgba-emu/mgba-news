@@ -232,7 +232,7 @@ When detection is that error-prone, every time another previously-undumped bootl
 
 This isn't really sustainable, so GBX takes another approach.
 While attaching other metadata to the file means it's no longer just a raw dump, this new format with an additional footer works around this per-ROM detection by simply telling the emulator what mapper is in use to bypass the need for heuristics at all.
-mGBA 0.10.0 adds support for this GBX format, though not all mappers defined in the GBX specification are currently supported. More will be [coming in future releases](https://mgba.io/i/2437).
+mGBA 0.10.0 adds support for this GBX format, though not all mappers defined in the GBX specification are currently supported. More will be [coming in future releases](https://[#2437](https://mgba.io/i/2437)).
 
 ## New builds
 
@@ -317,7 +317,7 @@ Subsequent releases, such as 0.11, should check off more items until 1.0 comes o
  - Tool for converting scanned pictures of e-Reader cards to raw dotcode data
  - Options for muting when inactive, minimized, or for different players in multiplayer
  - Cheat code support in homebrew ports
- - Acclerometer and gyro support for controllers on PC
+ - Accelerometer and gyro support for controllers on PC
  - Support for combo "Super Game Boy Color" SGB + GBC ROM hacks
  - Improved support for HuC-3 mapper, including RTC
  - Support for 64 kiB SRAM saves used in some bootlegs
